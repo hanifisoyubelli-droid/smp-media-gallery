@@ -32,8 +32,11 @@ jobs:
       - name: SDK yolunu yaz
         run: echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
 
+      # Windows'tan gelen depoda çalıştırma biti kaybolabiliyor (exit 126).
       - name: Derle (release, imzasız)
-        run: ./gradlew assembleRelease --no-daemon
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease --no-daemon
 
       # İmzasız APK'yı indirilebilir bırak: kullanıcı kendi anahtarıyla imzalar.
       - name: APK'yı yükle
