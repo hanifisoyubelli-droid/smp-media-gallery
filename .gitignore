@@ -1,0 +1,51 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# BU DEPO BEYAZ LİSTE İLE ÇALIŞIR.
+#
+# Aşağıdaki `/*` satırı kökteki HER ŞEYi yok sayar; yalnızca `!` ile açılan
+# yollar depoya girer. Neden böyle? Bu klasörde geliştiricinin KiŞİSEL dosyaları
+# da duruyor: sunucu yedekleri, adb ekran görüntüleri (gerçek fotoğraflar!),
+# logcat dökümleri, ölçüm betikleri. Kara liste (.gradle, build …) kullanılsaydı,
+# yarın eklenecek bir dosya (`rapor.md`, `test.apk`) sessizce herkese açık olurdu.
+#
+# Yeni bir klasörü depoya katmak istersen buraya tek satır ekle:  !/yeniKlasor/
+# ─────────────────────────────────────────────────────────────────────────────
+/*
+
+!/.github/
+!/.gitignore
+!/.gitattributes
+!/app/
+!/docs/
+!/gradle/
+!/build.gradle.kts
+!/gradle.properties
+!/gradlew
+!/gradlew.bat
+!/CONTRIBUTING.md
+!/LICENSE
+!/README.md
+!/SECURITY.md
+!/settings.gradle.kts
+
+# app/ beyaz listede; derleme çıktıları yine girmesin
+/app/build/
+*.iml
+
+# Makineye özel ve asla paylaşılmayacak şeyler
+/local.properties
+/.gradle/
+/.kotlin/
+/.idea/
+.DS_Store
+
+# YAYIN ANAHTARI — kaybedilirse uygulamanın güncellemeleri de kaybedilir
+*.jks
+*.keystore
+keystore.properties
+*.pk8
+*.pem
+
+# Ölçüm/günlük artıkları (kişisel sunucu adresleri buralarda kalabilir)
+*.log
+logcat*.txt
+.shots/

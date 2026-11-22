@@ -1,0 +1,44 @@
+name: Android CI
+
+# Ne zaman çalışır: ana dala ve her pull request'e gelen değişikliklerde.
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: JDK 17 kur
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Gradle önbelleği
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ hashFiles('**/*.gradle*', 'gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: gradle-
+
+      # local.properties depoya girmez; SDK yolu burada elle verilir.
+      - name: SDK yolunu yaz
+        run: echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+
+      - name: Derle (release, imzasız)
+        run: ./gradlew assembleRelease --no-daemon
+
+      # İmzasız APK'yı indirilebilir bırak: kullanıcı kendi anahtarıyla imzalar.
+      - name: APK'yı yükle
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-unsigned
+          path: app/build/outputs/apk/release/*.apk
+          if-no-files-found: error

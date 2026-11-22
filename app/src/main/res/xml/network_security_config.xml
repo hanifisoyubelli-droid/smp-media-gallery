@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Ağ güvenliği yapılandırması.
+
+    Neden sadece cleartext izni?
+    Uygulama iki tür sunucuya bağlanıyor:
+      • SMB paylaşımı (JCIFS, ham TCP 445) — HTTP değil, bu dosyadan bağımsız.
+      • Kendin barındırdığın (self-hosted) Nextcloud: yerel ağda düz HTTP ile
+        çalışan kurulumlar yaygın (modem/router üzerindeki paylaşımlar, dahili
+        IP'ler, sertifika alınmamış hostlar). Android 9+ cleartext trafiği
+        varsayılan olarak KAPATTIĞI için burada açıkça izin veriyoruz; aksi
+        hâlde kullanıcıya "sunucuya ulaşılamadı" gibi yanlış bir hata görünürdü.
+
+    Neden sertifika sabitlemiyoruz (certificate pinning)?
+    Sadece kendi sunucusunu kullanan bir geliştiricinin sertifikasını depoya
+    gömmek, uygulamanın diğer tüm kullanıcılar için bozulması demek. Kendinden
+    imzalı sertifikaya ihtiyaç duyan kullanıcı bunu AYARLARDAN bilinçli olarak
+    açar; varsayılan davranış sistem kökleri + ana makine adı doğrulamasıdır.
+    Ayrıntı: com.smpmedia.data.net.NextcloudTls
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

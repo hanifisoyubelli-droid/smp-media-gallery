@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Basit bulut + fotoğraf çerçevesi simgesi -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,30a14,14 0,0 0,-13.6 10.8A11,11 0,0 0,42 62h30a12,12 0,0 0,2.4 -23.8A14,14 0,0 0,54 30z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M40,66h28v6h-28z" />
+</vector>

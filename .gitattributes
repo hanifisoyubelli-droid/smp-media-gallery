@@ -1,0 +1,15 @@
+# Depoda tek satır sonu biçimi: LF. Windows'ta çalışan geliştiricinin editörü
+# CRLF'e çevirse bile Git depoya LF yazar (diff'ler şişmez).
+* text=auto eol=lf
+
+# Windows'ta çalıştırılabilir olması gerekenler
+*.bat text eol=crlf
+*.cmd text eol=crlf
+gradlew text eol=lf
+
+# İkili dosyalar
+*.png binary
+*.jpg binary
+*.webp binary
+*.jar binary
+*.apk binary
